@@ -14,13 +14,15 @@ Create {num_pairings} DIFFERENT complete outfits. Each MUST:
 
 For each outfit, explain WHY the items complement the source item (color harmony, style match, formality level).
 
+Write all text values (headline, highlights, styling_tip) in Spanish (español).
+
 Return ONLY a JSON array:
 [
   {{
     "items": [{source_number}, ...other_item_numbers],
-    "headline": "Short outfit title (3-5 words)",
-    "highlights": ["Why item X complements source", "Color/style note", "Occasion fit"],
-    "styling_tip": "Brief practical advice"
+    "headline": "Short outfit title in Spanish (3-5 words)",
+    "highlights": ["Why item X complements source, in Spanish", "Color/style note, in Spanish", "Occasion fit, in Spanish"],
+    "styling_tip": "Brief practical advice in Spanish"
   }}
 ]
 
