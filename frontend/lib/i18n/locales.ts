@@ -1,4 +1,4 @@
-export const SUPPORTED_LOCALES = ['en', 'zh-CN', 'zh-TW', 'ko', 'ja', 'fr', 'de', 'it'] as const;
+export const SUPPORTED_LOCALES = ['en', 'es', 'zh-CN', 'zh-TW', 'ko', 'ja', 'fr', 'de', 'it'] as const;
 
 export type SupportedLocale = (typeof SUPPORTED_LOCALES)[number];
 
@@ -10,6 +10,7 @@ export const LOCALE_COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
 
 export const LOCALE_METADATA: Record<SupportedLocale, { name: string; nativeName: string; dir: 'ltr' | 'rtl' }> = {
   en: { name: 'English', nativeName: 'English', dir: 'ltr' },
+  es: { name: 'Spanish', nativeName: 'Español', dir: 'ltr' },
   'zh-CN': { name: 'Chinese (Simplified)', nativeName: '中文简体', dir: 'ltr' },
   'zh-TW': { name: 'Chinese (Traditional)', nativeName: '中文繁體', dir: 'ltr' },
   ko: { name: 'Korean', nativeName: '한국어', dir: 'ltr' },

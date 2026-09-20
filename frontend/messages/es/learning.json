@@ -1,0 +1,70 @@
+{
+  "bestCombinations": {
+    "description": "Pares de prendas que constantemente te encantan juntos",
+    "title": "Tus mejores combinaciones"
+  },
+  "colorPreferences": {
+    "description": "Colores que tendés a aceptar o rechazar",
+    "noData": "Todavía no hay suficiente información para determinar preferencias de color.",
+    "title": "Preferencias de color aprendidas"
+  },
+  "confidence": "{percent}% de confianza",
+  "dismiss": "Descartar",
+  "lastUpdated": "Perfil de aprendizaje actualizado por última vez: {date}",
+  "loadError": "No se pudieron cargar los datos de aprendizaje. Intentá de nuevo.",
+  "noData": {
+    "alreadyGaveFeedback": "¿Ya diste tu opinión? Hacé clic en \"Calcular ahora\" para procesarla.",
+    "computeNow": "Calcular ahora",
+    "computing": "Calculando...",
+    "description": "Empezá aceptando o rechazando sugerencias de outfits y calificándolas.",
+    "getOutfitSuggestions": "Obtener sugerencias de outfits",
+    "title": "Todavía no hay datos de aprendizaje"
+  },
+  "occasionPatterns": {
+    "description": "Qué funciona para las distintas ocasiones",
+    "title": "Patrones por ocasión"
+  },
+  "percent": "{value}%",
+  "preferredColors": "Colores preferidos:",
+  "recompute": "Recalcular",
+  "stats": {
+    "acceptanceRate": "Tasa de aceptación",
+    "averageRating": "Calificación promedio",
+    "feedbackGiven": "Opiniones dadas",
+    "notEnoughData": "No hay suficientes datos",
+    "outOf5Stars": "de 5 estrellas",
+    "outfitsRated": "{count, plural, one {{count} outfit calificado} other {{count} outfits calificados}}",
+    "rateMoreOutfits": "Calificá más outfits",
+    "rateOutfitStyles": "Calificá estilos de outfits",
+    "styleRating": "Calificación de estilo",
+    "styleSatisfaction": "satisfacción de estilo",
+    "suggestionsAccepted": "de sugerencias aceptadas"
+  },
+  "styleInsights": {
+    "description": "Lo que aprendimos sobre tus preferencias",
+    "generate": "Nuevas estadísticas",
+    "title": "Estadísticas de estilo"
+  },
+  "stylePreferences": {
+    "description": "Estilos que coinciden con tu gusto",
+    "noData": "Todavía no hay suficiente información para determinar preferencias de estilo.",
+    "title": "Preferencias de estilo aprendidas"
+  },
+  "subtitle": "Cómo aprende la IA de tu retroalimentación",
+  "subtitleEmpty": "Empezá a calificar outfits para ayudar a la IA a aprender tus preferencias",
+  "successRate": "{percent}% de éxito",
+  "suggestedUpdates": {
+    "addToAvoid": "Agregar a colores a evitar:",
+    "addToFavorites": "Agregar a colores favoritos:",
+    "description": "Según tu retroalimentación, te sugerimos actualizar tus preferencias",
+    "title": "Actualizaciones de preferencias sugeridas",
+    "updatePreferences": "Actualizar preferencias"
+  },
+  "timesPaired": "combinado {count}x",
+  "title": "Aprendizaje IA",
+  "weatherPreferences": {
+    "description": "Cómo te vestís para las distintas condiciones",
+    "layers": "~{count} capas",
+    "title": "Preferencias climáticas"
+  }
+}

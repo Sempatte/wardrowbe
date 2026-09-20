@@ -1,0 +1,48 @@
+{
+  "card": {
+    "accept": "Aceptar",
+    "acceptFailed": "No se pudo aceptar el outfit",
+    "didntWearThis": "No usé esto",
+    "dismiss": "Descartar",
+    "dismissFailed": "No se pudo descartar el outfit",
+    "familyLabel": "Familia:",
+    "itemFallback": "Prenda",
+    "outfitAccepted": "Outfit aceptado",
+    "outfitDismissed": "Outfit descartado",
+    "rate": "Calificar",
+    "tip": "Tip:",
+    "update": "Actualizar",
+    "viewItemDetails": "Ver detalles de la prenda",
+    "woreInstead": "Usé en su lugar:"
+  },
+  "empty": {
+    "description": "Tu historial de recomendaciones de outfits va a aparecer acá una vez que empieces a recibir sugerencias.",
+    "getFirstSuggestion": "Obtené tu primera sugerencia",
+    "title": "Sin historial de recomendaciones"
+  },
+  "filters": {
+    "allOccasions": "Todas las ocasiones",
+    "allStatus": "Todos los estados",
+    "workout": "Entrenamiento"
+  },
+  "loadError": "No se pudo cargar el historial. Intentá de nuevo.",
+  "noOutfitsForDate": "No hay outfits para {date}",
+  "outfitCount": "{count, plural, one {# outfit} other {# outfits}}",
+  "sourceBadges": {
+    "external": "Externo",
+    "manual": "Manual",
+    "onDemand": "A pedido",
+    "pairing": "Combinación",
+    "scheduled": "Programado"
+  },
+  "status": {
+    "accepted": "Aceptado",
+    "expired": "Vencido",
+    "pending": "Pendiente",
+    "rejected": "Rechazado",
+    "sent": "Enviado",
+    "viewed": "Visto"
+  },
+  "subtitle": "Mirá tus recomendaciones de outfits anteriores",
+  "title": "Historial"
+}

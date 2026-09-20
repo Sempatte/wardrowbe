@@ -1,0 +1,106 @@
+{
+  "baseItem": {
+    "all": "Todos",
+    "basePiece": "Prenda base",
+    "change": "Cambiar",
+    "chooseItem": "Elegí una prenda",
+    "chooseItemHint": "Seleccioná una camisa, pantalón, calzado o cualquier prenda para armar el outfit alrededor",
+    "clear": "Limpiar",
+    "dialogDescription": "Seleccioná una prenda de tu guardarropa para armar este outfit alrededor.",
+    "dialogTitle": "Elegí una prenda para tu outfit",
+    "mustInclude": "Debe incluir",
+    "remove": "Quitar",
+    "subtitle": "Elegí una camisa, pantalón, calzado o cualquier prenda que deba aparecer en el outfit",
+    "title": "Armar alrededor de una prenda específica (opcional)"
+  },
+  "dismissOutfit": "Descartar outfit",
+  "error": "No se pudo generar la sugerencia de outfit. Intentá de nuevo.",
+  "feedback": {
+    "commentsOptional": "Comentarios (opcional)",
+    "commentsPlaceholder": "¿Algún comentario sobre este outfit?",
+    "didYouWear": "¿Usaste este outfit?",
+    "didYouWearDesc": "Contanos si seguiste esta recomendación para que podamos aprender tus preferencias.",
+    "howDidItWork": "¿Cómo te fue con este outfit?",
+    "itemsSelected": "{count, plural, one {# prenda seleccionada} other {# prendas seleccionadas}}",
+    "loadingMore": "Cargando más...",
+    "noItemsInWardrobe": "No hay prendas en el guardarropa",
+    "noMatch": "Ninguna prenda coincide con tu búsqueda",
+    "noWoreSomethingElse": "No, usé otra cosa",
+    "overallRating": "Calificación general",
+    "rateHowItWent": "Calificá cómo te fue",
+    "rateThisOutfit": "Calificar este outfit",
+    "searchWardrobe": "Buscar en tu guardarropa...",
+    "showingAll": "{count, plural, one {Mostrando la única prenda} other {Mostrando las # prendas}}",
+    "submitError": "No se pudo enviar la calificación",
+    "submitWithCount": "Enviar ({count})",
+    "submitted": "Calificación enviada",
+    "submitting": "Enviando...",
+    "tellUsWhatYouWore": "Contanos qué usaste",
+    "whatDidYouWear": "¿Qué usaste en su lugar?",
+    "whatDidYouWearDesc": "Seleccioná las prendas que realmente usaste. Esto nos ayuda a aprender tus preferencias.",
+    "yesWoreIt": "Sí, lo usé"
+  },
+  "generating": "Creando tu look...",
+  "getSuggestion": "Obtener sugerencia",
+  "greeting": {
+    "afternoon": "Buenas tardes",
+    "evening": "Buenas noches",
+    "morning": "Buenos días"
+  },
+  "location": {
+    "notSet": "Ubicación no configurada",
+    "setDescription": "Configurá tu ubicación en ajustes para sugerencias según el clima"
+  },
+  "loveIt": "Me encanta",
+  "occasionPrompt": "¿Cuál es la ocasión?",
+  "options": {
+    "allOptions": "Comparar todas",
+    "chooseThis": "Elegir este look",
+    "generateNew": "Generar 3 looks nuevos",
+    "optionNumber": "Look {number}",
+    "singleView": "Vista enfocada",
+    "title": "{count} opciones de outfit"
+  },
+  "outfitPreview": {
+    "familyRatings": {
+      "average": "({rating} <star></star> prom)",
+      "noRatings": "Todavía no hay calificaciones familiares.",
+      "noRatingsPrompt": "Todavía no hay calificaciones familiares. ¡Sé el primero en calificar!",
+      "rate": "Calificar",
+      "title": "Calificaciones familiares"
+    },
+    "imageRotated": "Imagen rotada",
+    "noImage": "Sin imagen",
+    "rotateFailed": "No se pudo rotar la imagen",
+    "rotateLeft": "Rotar a la izquierda",
+    "rotateRight": "Rotar a la derecha",
+    "title": "Outfit para {occasion}",
+    "viewItemDetails": "Ver detalles de la prenda"
+  },
+  "startOver": "Empezar de nuevo",
+  "subtitle": "Busquemos el outfit perfecto para tu día",
+  "tip": "Tip:",
+  "tryAnother": "Probar otro",
+  "weather": {
+    "feelsLike": "Sensación {temp}°",
+    "feelsLikeInline": "(sensación {temp}°)",
+    "rainChance": "{chance}% de lluvia",
+    "windSpeed": "{speed} km/h"
+  },
+  "weatherHints": {
+    "cold": "Abrigate bien, hace bastante frío",
+    "hot": "Vestite liviano y fresco",
+    "mild": "Una campera liviana estaría perfecta",
+    "nice": "Excelente clima para cualquier estilo",
+    "rainy": "Llevá paraguas o campera de lluvia",
+    "windy": "Considerá algo cortaviento"
+  },
+  "weatherOverride": {
+    "active": "Clima manual activo",
+    "condition": "Condición",
+    "overrideWeather": "Configurar clima manualmente",
+    "reset": "Restablecer",
+    "temperature": "Temperatura"
+  },
+  "yourOutfit": "Tu outfit"
+}

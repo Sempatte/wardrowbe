@@ -1,0 +1,66 @@
+{
+  "familyFeed": {
+    "browse": "Ver outfits de la familia",
+    "description": "Mirá qué está usando tu familia y calificá sus outfits",
+    "memberCount": "{count, plural, one {{count} miembro en {name}} other {{count} miembros en {name}}}",
+    "title": "Outfits familiares"
+  },
+  "insights": {
+    "empty": "¡Agregá más prendas y generá outfits para ver estadísticas personalizadas!",
+    "title": "Estadísticas"
+  },
+  "layout": {
+    "loading": "Cargando tu guardarropa..."
+  },
+  "nextScheduled": {
+    "comingUp": "Próximamente",
+    "dayAtTime": "{day} a las {time}",
+    "noSchedules": "No hay horarios configurados",
+    "occasionOutfit": "Outfit para {occasion}",
+    "setUpSchedule": "Configurar horario",
+    "title": "Próximo programado",
+    "today": "Hoy",
+    "tomorrow": "Mañana"
+  },
+  "notifications": {
+    "activeCount": "{active} de {total} activos",
+    "addChannel": "Agregar canal",
+    "configure": "Configurar",
+    "noChannels": "No hay canales configurados",
+    "title": "Notificaciones"
+  },
+  "pendingOutfits": {
+    "acceptFailed": "No se pudo aceptar el outfit",
+    "accepted": "Outfit aceptado",
+    "allCaughtUp": "Todo al día",
+    "dismissFailed": "No se pudo descartar el outfit",
+    "dismissLabel": "Descartar outfit",
+    "dismissed": "Outfit descartado",
+    "lookbook": "Lookbook",
+    "noPending": "No hay outfits esperando tu respuesta",
+    "title": "Outfits pendientes"
+  },
+  "quickActions": {
+    "addNewItem": "Agregar prenda",
+    "description": "Tareas comunes para empezar",
+    "getOutfitSuggestion": "Obtener sugerencia de outfit",
+    "title": "Acciones rápidas"
+  },
+  "subtitle": "Esto es lo que está pasando con tu guardarropa",
+  "userFallback": "Usuario",
+  "weather": {
+    "feelsLike": "sensación {temp}",
+    "getOutfitSuggestion": "Obtener sugerencia de outfit",
+    "locationNotSet": "Ubicación no configurada",
+    "rainChance": "{percent}% de probabilidad de lluvia",
+    "setLocation": "Configurar ubicación",
+    "title": "Clima de hoy"
+  },
+  "weeklySummary": {
+    "accepted": "aceptados",
+    "avgRatingValue": "Calificación promedio: {rating}/5",
+    "outfits": "outfits",
+    "title": "Esta semana"
+  },
+  "welcomeBack": "Bienvenido de nuevo, {name}"
+}

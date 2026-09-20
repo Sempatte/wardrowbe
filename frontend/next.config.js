@@ -2,7 +2,11 @@ const createNextIntlPlugin = require('next-intl/plugin');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
+  // Standalone output is needed for our own Docker image (see Dockerfile, which copies
+  // .next/standalone) but must be OFF for AWS Amplify Hosting's Next.js SSR compute, which
+  // expects the default .next build output. WARDROWBE_STANDALONE_BUILD is set only in the
+  // Dockerfile build stage, so Amplify (which doesn't set it) gets the default output.
+  output: process.env.WARDROWBE_STANDALONE_BUILD === 'true' ? 'standalone' : undefined,
   experimental: {
     // Disable automatic static optimization for pages using client-side context
     missingSuspenseWithCSRBailout: false,

@@ -1,0 +1,12 @@
+{
+  "default": "Algo salió mal. Intentá de nuevo.",
+  "invite": {
+    "alreadyInFamily": "Ya estás en una familia.",
+    "invalidLink": "Este link de invitación es inválido o expiró.",
+    "wrongEmail": "Esta invitación fue enviada a otra dirección de email."
+  },
+  "pageLoad": {
+    "description": "Encontramos un error al cargar este contenido. Puede ser un problema temporal.",
+    "title": "No se pudo cargar esta página"
+  }
+}
