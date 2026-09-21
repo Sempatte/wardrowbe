@@ -46,6 +46,14 @@ function buildRequestHeaders(request: NextRequest): Headers {
       headers.set(key, value);
     }
   });
+
+  // The backend sits behind an infra-level shared secret (checked by Caddy), separate from the
+  // app's own Authorization: Bearer <jwt> user session — a distinct header avoids clobbering it.
+  const backendSharedSecret = process.env.BACKEND_SHARED_SECRET;
+  if (backendSharedSecret) {
+    headers.set('X-Internal-Auth', backendSharedSecret);
+  }
+
   return headers;
 }
 
