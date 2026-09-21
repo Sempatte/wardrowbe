@@ -213,12 +213,26 @@ export async function getPendingUploads(): Promise<QueuedUpload[]> {
   return records.filter((r) => r.status !== 'done');
 }
 
+// Safari/WebKit can intermittently fail to re-serialize a record's embedded File/Blob
+// back into IndexedDB on repeated writes ("UnknownError: Error preparing Blob/File data
+// to be stored in object store") - most often when the underlying photo is an iCloud
+// placeholder Safari hasn't fully materialized yet. This bookkeeping write is a
+// durability nice-to-have (so the queue survives a reload), not the upload itself, so a
+// failure here must never throw and block the actual network attempt that follows it.
+async function putRecordBestEffort(record: QueuedUpload): Promise<void> {
+  try {
+    await putRecord(record);
+  } catch (error) {
+    console.warn('upload-queue: failed to persist record update', record.id, error);
+  }
+}
+
 export async function markUploading(id: string): Promise<void> {
   const record = await getRecord(id);
   if (!record) return;
   record.status = 'uploading';
   record.updatedAt = Date.now();
-  await putRecord(record);
+  await putRecordBestEffort(record);
 }
 
 export async function markDone(id: string): Promise<void> {
@@ -233,7 +247,7 @@ export async function markRetryable(id: string, error: string): Promise<void> {
   record.attempts += 1;
   record.lastError = error;
   record.updatedAt = Date.now();
-  await putRecord(record);
+  await putRecordBestEffort(record);
 }
 
 export async function markPendingForRetry(id: string): Promise<void> {
@@ -248,7 +262,7 @@ export async function markPendingForRetry(id: string): Promise<void> {
   record.attempts = 0;
   record.lastError = null;
   record.updatedAt = Date.now();
-  await putRecord(record);
+  await putRecordBestEffort(record);
 }
 
 export async function markTerminal(id: string, error: string): Promise<void> {
@@ -258,7 +272,7 @@ export async function markTerminal(id: string, error: string): Promise<void> {
   record.terminal = true;
   record.lastError = error;
   record.updatedAt = Date.now();
-  await putRecord(record);
+  await putRecordBestEffort(record);
 }
 
 export async function dismiss(id: string): Promise<void> {

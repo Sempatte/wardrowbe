@@ -86,9 +86,12 @@ export function UploadQueueIndicator() {
               <div className="max-h-40 space-y-1 overflow-y-auto">
                 {state.terminalRecords.map((record) => (
                   <div key={record.id} className="flex items-center justify-between gap-2 text-xs">
-                    <span className="truncate" title={record.lastError ?? undefined}>
-                      {record.filename}
-                    </span>
+                    <div className="min-w-0">
+                      <p className="truncate">{record.filename}</p>
+                      {record.lastError && (
+                        <p className="truncate text-muted-foreground">{record.lastError}</p>
+                      )}
+                    </div>
                     <div className="flex shrink-0 items-center gap-2">
                       <button
                         type="button"
