@@ -62,6 +62,14 @@ class Settings(BaseSettings):
     ai_max_tokens: int = Field(default=8000)
     ai_reasoning_effort: str | None = Field(default="none")
 
+    # Virtual try-on (Gemini native image generation API). Separate from the
+    # ai_* settings above: those talk to an OpenAI-compatible chat/vision
+    # endpoint (Ollama, OpenAI, etc.), while this calls Gemini's own
+    # generateContent API for multimodal image output, which has a different
+    # request/response shape.
+    gemini_api_key: str | None = Field(default=None)
+    gemini_image_model: str = Field(default="gemini-3.1-flash-image")
+
     @field_validator("ai_reasoning_effort", mode="before")
     @classmethod
     def normalize_reasoning_effort(cls, v: str | None) -> str | None:

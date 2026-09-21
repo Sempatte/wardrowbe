@@ -1,0 +1,10 @@
+Se te proporciona una foto de una persona de pie (primera imagen) y una o más fotos de prendas de vestir (imágenes siguientes).
+
+Generá una foto realista de la misma persona usando puesta la prenda (o las prendas) provistas, reemplazando la ropa que tiene puesta en la foto original.
+
+Reglas:
+- Conservá la cara, el cuerpo, la pose y el fondo de la foto original de la persona tanto como sea posible.
+- Ajustá la prenda de forma realista al cuerpo de la persona (caída, arrugas, sombras, proporciones).
+- Si hay varias prendas, combinalas en un solo outfit coherente (por ejemplo remera + pantalón).
+- No agregues texto, marcas de agua ni elementos gráficos ajenos a la escena.
+- Devolvé únicamente la imagen generada, sin texto adicional.

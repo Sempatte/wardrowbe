@@ -9,6 +9,7 @@ import { format, formatDistanceToNow, parseISO } from 'date-fns';
 import {
   BookmarkPlus,
   CalendarPlus,
+  PersonStanding,
   ChevronLeft,
   Loader2,
   Pencil,
@@ -24,6 +25,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { LineageCard } from '@/components/shared/lineage-card';
 import { CloneToLookbookDialog } from '@/components/shared/clone-to-lookbook-dialog';
+import { TryOnDialog } from '@/components/try-on-dialog';
 import { useDeleteOutfit, useOutfit, useOutfits } from '@/lib/hooks/use-outfits';
 import { useWearToday } from '@/lib/hooks/use-studio';
 import { getErrorMessage } from '@/lib/api';
@@ -31,6 +33,7 @@ import { getErrorMessage } from '@/lib/api';
 export default function OutfitDetailPage() {
   const t = useTranslations('outfits');
   const tc = useTranslations('common');
+  const tt = useTranslations('tryon');
   const router = useRouter();
   const params = useParams<{ id: string }>();
   const outfitId = params?.id;
@@ -40,6 +43,7 @@ export default function OutfitDetailPage() {
   const wearTodayMutation = useWearToday(outfitId ?? '');
 
   const [cloneDialogOpen, setCloneDialogOpen] = useState(false);
+  const [showTryOnDialog, setShowTryOnDialog] = useState(false);
 
   const isTemplate =
     outfit !== undefined && outfit !== null && outfit.scheduled_for === null;
@@ -188,6 +192,10 @@ export default function OutfitDetailPage() {
       </Card>
 
       <div className="flex flex-wrap gap-2">
+        <Button variant="outline" onClick={() => setShowTryOnDialog(true)}>
+          <PersonStanding className="h-4 w-4 mr-2" />
+          {tt('action')}
+        </Button>
         {isTemplate && (
           <Button onClick={handleWearToday} disabled={wearTodayMutation.isPending}>
             {wearTodayMutation.isPending ? (
@@ -278,6 +286,12 @@ export default function OutfitDetailPage() {
           onSuccess={(newId) => router.push(`/dashboard/outfits/${newId}`)}
         />
       )}
+
+      <TryOnDialog
+        items={outfit.items}
+        open={showTryOnDialog}
+        onOpenChange={setShowTryOnDialog}
+      />
     </div>
   );
 }

@@ -35,6 +35,7 @@ import {
   Plus,
   X,
   Layers,
+  PersonStanding,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -54,6 +55,7 @@ import {
   CollapsibleTrigger,
 } from '@/components/ui/collapsible';
 import { ItemPicker } from '@/components/shared/item-picker';
+import { TryOnDialog } from '@/components/try-on-dialog';
 import { useItem } from '@/lib/hooks/use-items';
 import { api, ApiError, setAccessToken } from '@/lib/api';
 import { Item, Outfit, SuggestRequest } from '@/lib/types';
@@ -323,6 +325,7 @@ function OutfitCard({
   t,
   onAccept,
   onReject,
+  onTryOn,
   showActions = true,
   badgeLabel,
 }: {
@@ -332,9 +335,11 @@ function OutfitCard({
   t: Translator;
   onAccept?: () => void;
   onReject?: () => void;
+  onTryOn?: () => void;
   showActions?: boolean;
   badgeLabel?: string;
 }) {
+  const tt = useTranslations('tryon');
   return (
     <Card className="overflow-hidden flex flex-col h-full">
       <div className="bg-gradient-to-r from-primary/10 to-primary/5 p-4 border-b">
@@ -419,6 +424,17 @@ function OutfitCard({
 
         {showActions && (
           <div className="pt-2 flex gap-2 justify-end border-t mt-auto">
+            {onTryOn && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={onTryOn}
+                className="h-8 px-2.5 gap-1.5 text-xs text-muted-foreground"
+              >
+                <PersonStanding className="h-3.5 w-3.5" />
+                {tt('action')}
+              </Button>
+            )}
             {onReject && (
               <Button
                 variant="ghost"
@@ -454,6 +470,7 @@ function OutfitResultsView({
   onToggleCompareAll,
   onAccept,
   onReject,
+  onTryOn,
   onTryAnother,
   onNewRequest,
   t,
@@ -468,10 +485,12 @@ function OutfitResultsView({
   onToggleCompareAll: () => void;
   onAccept: (outfit?: Outfit) => void;
   onReject: (outfit?: Outfit) => void;
+  onTryOn: (outfit: Outfit) => void;
   onTryAnother: () => void;
   onNewRequest: () => void;
   t: Translator;
 }) {
+  const tt = useTranslations('tryon');
   const currentOutfit = outfits[activeOptionIndex] || outfits[0];
 
   return (
@@ -562,6 +581,7 @@ function OutfitResultsView({
                 badgeLabel={t('options.optionNumber', { number: idx + 1 })}
                 onAccept={() => onAccept(opt)}
                 onReject={() => onReject(opt)}
+                onTryOn={() => onTryOn(opt)}
                 showActions={true}
               />
             ))}
@@ -592,6 +612,15 @@ function OutfitResultsView({
             <Button variant="outline" size="lg" onClick={onTryAnother} className="gap-2">
               <RefreshCw className="h-4 w-4" />
               {outfits.length > 1 ? t('options.generateNew') : t('tryAnother')}
+            </Button>
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={() => onTryOn(currentOutfit)}
+              className="gap-2"
+            >
+              <PersonStanding className="h-4 w-4" />
+              {tt('action')}
             </Button>
             <Button size="lg" onClick={() => onAccept(currentOutfit)} className="gap-2">
               <ThumbsUp className="h-4 w-4" />
@@ -638,6 +667,7 @@ function SuggestContent() {
   const [activeOptionIndex, setActiveOptionIndex] = useState<number>(0);
   const [isCompareAll, setIsCompareAll] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [tryOnOutfit, setTryOnOutfit] = useState<Outfit | null>(null);
 
   useEffect(() => {
     if (preselectedItem && !selectedItem) {
@@ -929,6 +959,7 @@ function SuggestContent() {
           baseItemId={selectedItem?.id}
           onAccept={handleAccept}
           onReject={handleReject}
+          onTryOn={setTryOnOutfit}
           onTryAnother={handleTryAnother}
           onNewRequest={handleNewRequest}
           t={t}
@@ -1015,6 +1046,14 @@ function SuggestContent() {
           </div>
         </DialogContent>
       </Dialog>
+
+      <TryOnDialog
+        items={tryOnOutfit?.items ?? []}
+        open={!!tryOnOutfit}
+        onOpenChange={(open) => {
+          if (!open) setTryOnOutfit(null);
+        }}
+      />
     </div>
   );
 }

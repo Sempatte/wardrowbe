@@ -1,0 +1,37 @@
+{
+  "action": "Essayage virtuel",
+  "bodyPhoto": {
+    "description": "Utilisée par l'essayage virtuel pour générer les aperçus de tenues.",
+    "remove": "Supprimer",
+    "removed": "Photo supprimée",
+    "replace": "Remplacer",
+    "title": "Photo corporelle",
+    "upload": "Ajouter une photo"
+  },
+  "dialog": {
+    "applyComment": "Appliquer le commentaire",
+    "close": "Fermer",
+    "commentPlaceholder": "Ex. : ne rentrez pas la chemise dans le short",
+    "description": "Générez un aperçu de ce look sur vous, à partir de votre photo et de l'IA.",
+    "download": "Télécharger l'image",
+    "generate": "Générer",
+    "generating": "Génération en cours... cela peut prendre quelques secondes",
+    "noBodyPhoto": {
+      "description": "Une photo de vous debout, en pied, est nécessaire pour essayer des vêtements.",
+      "title": "Ajoutez une photo de vous",
+      "upload": "Ajouter une photo"
+    },
+    "regenerate": "Réessayer",
+    "removeComment": "Supprimer le commentaire",
+    "resultDisclaimer": "Cette image n'est pas enregistrée. Téléchargez-la si vous souhaitez la conserver.",
+    "selectedItems": "Articles sélectionnés",
+    "title": "Essayage virtuel"
+  },
+  "errors": {
+    "generic": "Impossible de générer l'image. Veuillez réessayer.",
+    "noBodyPhoto": "Ajoutez une photo de vous avant d'utiliser l'essayage virtuel.",
+    "quotaExceeded": "Le crédit de l'API Gemini est épuisé. Rechargez du crédit sur ai.studio/projects pour continuer à utiliser l'essayage virtuel.",
+    "sessionExpired": "Votre session a expiré. Reconnectez-vous et réessayez.",
+    "uploadFailed": "Impossible d'ajouter la photo."
+  }
+}

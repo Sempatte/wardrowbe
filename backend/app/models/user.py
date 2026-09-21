@@ -51,6 +51,13 @@ class User(Base):
     onboarding_completed: Mapped[bool] = mapped_column(Boolean, default=False)
     body_measurements: Mapped[dict | None] = mapped_column(JSONB)
 
+    # Persistent body photo for the virtual try-on feature. Stored the same way
+    # as clothing item images (per-user path under storage_path), served via
+    # the existing /images/{user_id}/{filename} endpoint.
+    body_photo_path: Mapped[str | None] = mapped_column(String(500))
+    body_photo_medium_path: Mapped[str | None] = mapped_column(String(500))
+    body_photo_thumbnail_path: Mapped[str | None] = mapped_column(String(500))
+
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now(), onupdate=func.now()

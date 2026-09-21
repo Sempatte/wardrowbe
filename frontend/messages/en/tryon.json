@@ -1,0 +1,37 @@
+{
+  "action": "Virtual try-on",
+  "bodyPhoto": {
+    "description": "Used by the virtual try-on to generate outfit previews.",
+    "remove": "Remove",
+    "removed": "Photo removed",
+    "replace": "Replace",
+    "title": "Body photo",
+    "upload": "Upload photo"
+  },
+  "dialog": {
+    "applyComment": "Apply comment",
+    "close": "Close",
+    "commentPlaceholder": "E.g. don't tuck the shirt in",
+    "description": "Generate a preview of how this looks on you, using your photo and AI.",
+    "download": "Download image",
+    "generate": "Generate",
+    "generating": "Generating... this can take a few seconds",
+    "noBodyPhoto": {
+      "description": "You need a full-body, standing photo to try on clothes.",
+      "title": "Upload a photo of yourself",
+      "upload": "Upload photo"
+    },
+    "regenerate": "Try again",
+    "removeComment": "Remove comment",
+    "resultDisclaimer": "This image isn't saved. Download it if you want to keep it.",
+    "selectedItems": "Selected items",
+    "title": "Virtual try-on"
+  },
+  "errors": {
+    "generic": "Couldn't generate the image. Please try again.",
+    "noBodyPhoto": "Upload a photo of yourself before using the virtual try-on.",
+    "quotaExceeded": "The Gemini API credit ran out. Add funds at ai.studio/projects to keep using the virtual try-on.",
+    "sessionExpired": "Your session expired. Sign in again and try again.",
+    "uploadFailed": "Couldn't upload the photo."
+  }
+}

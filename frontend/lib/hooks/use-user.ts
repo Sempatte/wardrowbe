@@ -18,6 +18,7 @@ export interface UserProfile {
   role: string;
   onboarding_completed: boolean;
   body_measurements?: Record<string, number | string> | null;
+  body_photo_url?: string | null;
 }
 
 export interface UserProfileUpdate {

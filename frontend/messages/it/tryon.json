@@ -1,0 +1,37 @@
+{
+  "action": "Camerino virtuale",
+  "bodyPhoto": {
+    "description": "Usata dal camerino virtuale per generare le anteprime degli outfit.",
+    "remove": "Rimuovi",
+    "removed": "Foto rimossa",
+    "replace": "Sostituisci",
+    "title": "Foto del corpo",
+    "upload": "Carica foto"
+  },
+  "dialog": {
+    "applyComment": "Applica commento",
+    "close": "Chiudi",
+    "commentPlaceholder": "Es: non infilare la camicia nei pantaloncini",
+    "description": "Genera un'anteprima di come ti sta questo capo, usando la tua foto e l'IA.",
+    "download": "Scarica immagine",
+    "generate": "Genera",
+    "generating": "Generazione in corso... può richiedere qualche secondo",
+    "noBodyPhoto": {
+      "description": "Serve una foto a figura intera, in piedi, per provare i capi.",
+      "title": "Carica una tua foto",
+      "upload": "Carica foto"
+    },
+    "regenerate": "Riprova",
+    "removeComment": "Rimuovi commento",
+    "resultDisclaimer": "Questa immagine non viene salvata. Scaricala se vuoi conservarla.",
+    "selectedItems": "Capi selezionati",
+    "title": "Camerino virtuale"
+  },
+  "errors": {
+    "generic": "Non è stato possibile generare l'immagine. Riprova.",
+    "noBodyPhoto": "Carica una tua foto prima di usare il camerino virtuale.",
+    "quotaExceeded": "Il credito dell'API Gemini è esaurito. Ricarica il credito su ai.studio/projects per continuare a usare il camerino virtuale.",
+    "sessionExpired": "La tua sessione è scaduta. Accedi di nuovo e riprova.",
+    "uploadFailed": "Non è stato possibile caricare la foto."
+  }
+}

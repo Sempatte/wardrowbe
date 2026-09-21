@@ -1,0 +1,37 @@
+{
+  "action": "Virtuelle Anprobe",
+  "bodyPhoto": {
+    "description": "Wird von der virtuellen Anprobe verwendet, um Outfit-Vorschauen zu erstellen.",
+    "remove": "Entfernen",
+    "removed": "Foto entfernt",
+    "replace": "Ersetzen",
+    "title": "Körperfoto",
+    "upload": "Foto hochladen"
+  },
+  "dialog": {
+    "applyComment": "Kommentar anwenden",
+    "close": "Schließen",
+    "commentPlaceholder": "Z. B. Hemd nicht in die Shorts stecken",
+    "description": "Erstelle eine Vorschau, wie dir das mit deinem Foto und KI steht.",
+    "download": "Bild herunterladen",
+    "generate": "Generieren",
+    "generating": "Wird generiert... das kann ein paar Sekunden dauern",
+    "noBodyPhoto": {
+      "description": "Du brauchst ein stehendes Ganzkörperfoto, um Kleidung anzuprobieren.",
+      "title": "Lade ein Foto von dir hoch",
+      "upload": "Foto hochladen"
+    },
+    "regenerate": "Erneut versuchen",
+    "removeComment": "Kommentar entfernen",
+    "resultDisclaimer": "Dieses Bild wird nicht gespeichert. Lade es herunter, wenn du es behalten möchtest.",
+    "selectedItems": "Ausgewählte Teile",
+    "title": "Virtuelle Anprobe"
+  },
+  "errors": {
+    "generic": "Das Bild konnte nicht generiert werden. Bitte versuche es erneut.",
+    "noBodyPhoto": "Lade ein Foto von dir hoch, bevor du die virtuelle Anprobe nutzt.",
+    "quotaExceeded": "Das Guthaben der Gemini-API ist aufgebraucht. Lade Guthaben unter ai.studio/projects auf, um die virtuelle Anprobe weiter zu nutzen.",
+    "sessionExpired": "Deine Sitzung ist abgelaufen. Melde dich erneut an und versuche es noch mal.",
+    "uploadFailed": "Das Foto konnte nicht hochgeladen werden."
+  }
+}

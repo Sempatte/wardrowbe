@@ -1,0 +1,37 @@
+{
+  "action": "가상 피팅",
+  "bodyPhoto": {
+    "description": "가상 피팅에서 아웃핏 미리보기를 생성하는 데 사용됩니다.",
+    "remove": "삭제",
+    "removed": "사진이 삭제되었습니다",
+    "replace": "교체",
+    "title": "전신 사진",
+    "upload": "사진 업로드"
+  },
+  "dialog": {
+    "applyComment": "댓글 적용",
+    "close": "닫기",
+    "commentPlaceholder": "예: 셔츠를 반바지 안에 넣지 마세요",
+    "description": "내 사진과 AI를 사용해 이 옷을 입었을 때의 모습을 미리 생성합니다.",
+    "download": "이미지 다운로드",
+    "generate": "생성",
+    "generating": "생성 중... 몇 초 정도 걸릴 수 있습니다",
+    "noBodyPhoto": {
+      "description": "옷을 입어보려면 서 있는 전신 사진이 필요합니다.",
+      "title": "내 사진을 업로드하세요",
+      "upload": "사진 업로드"
+    },
+    "regenerate": "다시 시도",
+    "removeComment": "댓글 삭제",
+    "resultDisclaimer": "이 이미지는 저장되지 않습니다. 보관하려면 다운로드하세요.",
+    "selectedItems": "선택한 아이템",
+    "title": "가상 피팅"
+  },
+  "errors": {
+    "generic": "이미지를 생성하지 못했습니다. 다시 시도해 주세요.",
+    "noBodyPhoto": "가상 피팅을 사용하기 전에 내 사진을 업로드하세요.",
+    "quotaExceeded": "Gemini API 크레딧이 모두 소진되었습니다. ai.studio/projects에서 크레딧을 충전하면 가상 피팅을 계속 사용할 수 있습니다.",
+    "sessionExpired": "세션이 만료되었습니다. 다시 로그인한 후 시도해 주세요.",
+    "uploadFailed": "사진을 업로드하지 못했습니다."
+  }
+}

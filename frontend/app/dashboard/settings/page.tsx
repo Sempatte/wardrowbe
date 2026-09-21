@@ -1,8 +1,9 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { useSession } from 'next-auth/react';
-import { Loader2, Save, RotateCcw, Check, Plus, Trash2, ChevronUp, ChevronDown, Server, MapPin, Navigation, Ruler } from 'lucide-react';
+import { Loader2, Save, RotateCcw, Check, Plus, Trash2, ChevronUp, ChevronDown, Server, MapPin, Navigation, Ruler, Camera } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -19,6 +20,7 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { usePreferences, useUpdatePreferences, useResetPreferences, useTestAIEndpoint } from '@/lib/hooks/use-preferences';
 import { useUserProfile, useUpdateUserProfile } from '@/lib/hooks/use-user';
+import { useUploadBodyPhoto, useDeleteBodyPhoto } from '@/lib/hooks/use-tryon';
 import {
   getNetworkLocationUrl,
   formatReverseGeocodedLocation,
@@ -168,6 +170,7 @@ export default function SettingsPage() {
   const t = useTranslations('settings');
   const tc = useTranslations('common');
   const tConst = useTranslations('constants');
+  const tt = useTranslations('tryon');
   const occasions = useOccasions();
   const { data: session } = useSession();
   const { data: preferences, isLoading } = usePreferences();
@@ -176,6 +179,9 @@ export default function SettingsPage() {
   const resetPreferences = useResetPreferences();
   const testEndpoint = useTestAIEndpoint();
   const updateUserProfile = useUpdateUserProfile();
+  const uploadBodyPhoto = useUploadBodyPhoto();
+  const deleteBodyPhoto = useDeleteBodyPhoto();
+  const bodyPhotoInputRef = useRef<HTMLInputElement>(null);
 
   const [formData, setFormData] = useState<Partial<Preferences>>({});
   const [hasChanges, setHasChanges] = useState(false);
@@ -452,6 +458,23 @@ export default function SettingsPage() {
     }
   };
 
+  const handleUploadBodyPhoto = async (file: File) => {
+    try {
+      await uploadBodyPhoto.mutateAsync(file);
+    } catch (e) {
+      toast.error(getErrorMessage(e, tt('errors.uploadFailed')));
+    }
+  };
+
+  const handleDeleteBodyPhoto = async () => {
+    try {
+      await deleteBodyPhoto.mutateAsync();
+      toast.success(tt('bodyPhoto.removed'));
+    } catch (e) {
+      toast.error(getErrorMessage(e, tt('errors.uploadFailed')));
+    }
+  };
+
   const handleTestEndpoint = async (index: number, url: string) => {
     setEndpointTests((prev) => ({ ...prev, [index]: { status: 'testing' } }));
     try {
@@ -685,6 +708,70 @@ export default function SettingsPage() {
                 {t('location.required')}
               </p>
             )}
+          </CardContent>
+        </Card>
+
+        {/* Body Photo (virtual try-on) */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Camera className="h-5 w-5" />
+              {tt('bodyPhoto.title')}
+            </CardTitle>
+            <CardDescription>{tt('bodyPhoto.description')}</CardDescription>
+          </CardHeader>
+          <CardContent className="flex items-center gap-4">
+            <div className="w-20 h-20 rounded-lg bg-muted overflow-hidden relative border flex-shrink-0">
+              {userProfile?.body_photo_url ? (
+                <Image
+                  src={userProfile.body_photo_url}
+                  alt={tt('bodyPhoto.title')}
+                  fill
+                  className="object-cover"
+                  sizes="80px"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center">
+                  <Camera className="h-6 w-6 text-muted-foreground" />
+                </div>
+              )}
+            </div>
+            <input
+              ref={bodyPhotoInputRef}
+              type="file"
+              accept="image/jpeg,image/png,image/webp,image/heic,image/heif"
+              className="hidden"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) handleUploadBodyPhoto(file);
+              }}
+            />
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => bodyPhotoInputRef.current?.click()}
+                disabled={uploadBodyPhoto.isPending}
+              >
+                {uploadBodyPhoto.isPending ? (
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                ) : (
+                  <Camera className="h-4 w-4 mr-2" />
+                )}
+                {userProfile?.body_photo_url ? tt('bodyPhoto.replace') : tt('bodyPhoto.upload')}
+              </Button>
+              {userProfile?.body_photo_url && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleDeleteBodyPhoto}
+                  disabled={deleteBodyPhoto.isPending}
+                >
+                  <Trash2 className="h-4 w-4 mr-2" />
+                  {tt('bodyPhoto.remove')}
+                </Button>
+              )}
+            </div>
           </CardContent>
         </Card>
 

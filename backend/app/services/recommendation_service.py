@@ -31,7 +31,7 @@ from app.services.weather_service import (
     WeatherService,
     WeatherServiceError,
 )
-from app.utils.clothing import canonical_item_order, deduplicate_by_body_slot
+from app.utils.clothing import ITEM_ROLE, canonical_item_order, deduplicate_by_body_slot
 from app.utils.prompts import load_prompt
 from app.utils.timezone import get_user_today
 
@@ -584,6 +584,54 @@ class RecommendationService:
 
         return [parsed]
 
+    def _missing_required_roles(
+        self, valid_ids: list[UUID], item_type_map: dict[UUID, str]
+    ) -> set[str]:
+        """Roles an outfit must have to be wearable: a full_body piece (dress/jumpsuit),
+        or a top+bottom pair, plus footwear either way."""
+        roles_present = {ITEM_ROLE.get(item_type_map.get(iid, "")) for iid in valid_ids}
+        missing: set[str] = set()
+        if "full_body" not in roles_present:
+            if "base_top" not in roles_present:
+                missing.add("base_top")
+            if "bottom" not in roles_present:
+                missing.add("bottom")
+        if "footwear" not in roles_present:
+            missing.add("footwear")
+        return missing
+
+    def _ensure_complete_outfit(
+        self,
+        valid_ids: list[UUID],
+        item_type_map: dict[UUID, str],
+        number_map: dict[int, UUID],
+    ) -> list[UUID]:
+        """Backfill a top/bottom/footwear the AI dropped, from the same ranked candidate
+        pool it was given. The prompt already asks for a complete outfit, but small/local
+        models don't reliably follow that, so this guarantees it in code instead.
+        """
+        missing = self._missing_required_roles(valid_ids, item_type_map)
+        if not missing:
+            return valid_ids
+
+        used = set(valid_ids)
+        for num in sorted(number_map.keys()):
+            if not missing:
+                break
+            candidate_id = number_map[num]
+            if candidate_id in used:
+                continue
+            role = ITEM_ROLE.get(item_type_map.get(candidate_id, ""))
+            if role not in missing:
+                continue
+            valid_ids.append(candidate_id)
+            used.add(candidate_id)
+            missing.discard(role)
+
+        if missing:
+            logger.info(f"Outfit still missing {missing}: no matching item in candidate pool")
+        return valid_ids
+
     async def _materialize_outfit(
         self,
         outfit_data: dict,
@@ -629,14 +677,18 @@ class RecommendationService:
         if not valid_ids:
             raise AIRecommendationError("AI did not select any valid items")
 
-        # Deduplicate by body slot (e.g. prevent shorts + pants)
+        # Deduplicate by body slot (e.g. prevent shorts + pants). item_type_map covers the
+        # full candidate pool (not just valid_ids) so _ensure_complete_outfit below can look
+        # up the role of a backfill candidate it hasn't added yet.
+        candidate_ids = set(valid_ids) | set(number_map.values())
         items_result = await self.db.execute(
-            select(ClothingItem.id, ClothingItem.type).where(ClothingItem.id.in_(valid_ids))
+            select(ClothingItem.id, ClothingItem.type).where(ClothingItem.id.in_(candidate_ids))
         )
         item_type_map = {row.id: (row.type or "").lower() for row in items_result}
         valid_ids = deduplicate_by_body_slot(
             valid_ids, item_type_map, mandatory_item_ids=mandatory_item_ids
         )
+        valid_ids = self._ensure_complete_outfit(valid_ids, item_type_map, number_map)
         valid_ids = canonical_item_order(valid_ids, item_type_map)
 
         reasoning = outfit_data.get("headline") or outfit_data.get("reasoning")

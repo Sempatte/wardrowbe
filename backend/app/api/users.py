@@ -10,6 +10,7 @@ from app.models.user import User
 from app.services.user_service import UserService
 from app.utils.auth import get_current_user
 from app.utils.locale import SUPPORTED_LOCALES, is_supported_locale
+from app.utils.signed_urls import sign_image_url
 
 router = APIRouter(prefix="/users/me", tags=["Users"])
 
@@ -32,6 +33,7 @@ class UserProfileResponse(BaseModel):
     role: str
     onboarding_completed: bool
     body_measurements: dict | None = None
+    body_photo_url: str | None = None
 
 
 class UserProfileUpdate(BaseModel):
@@ -107,6 +109,7 @@ def _user_response(user: User) -> UserProfileResponse:
         role=user.role,
         onboarding_completed=user.onboarding_completed,
         body_measurements=user.body_measurements,
+        body_photo_url=sign_image_url(user.body_photo_path) if user.body_photo_path else None,
     )
 
 

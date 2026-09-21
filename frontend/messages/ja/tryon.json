@@ -1,0 +1,37 @@
+{
+  "action": "バーチャル試着",
+  "bodyPhoto": {
+    "description": "バーチャル試着でアウトフィットのプレビューを生成する際に使用されます。",
+    "remove": "削除",
+    "removed": "写真を削除しました",
+    "replace": "変更",
+    "title": "全身写真",
+    "upload": "写真をアップロード"
+  },
+  "dialog": {
+    "applyComment": "コメントを適用",
+    "close": "閉じる",
+    "commentPlaceholder": "例：シャツをズボンに入れないで",
+    "description": "あなたの写真とAIを使って、このアイテムを着た姿のプレビューを生成します。",
+    "download": "画像をダウンロード",
+    "generate": "生成",
+    "generating": "生成中...数秒かかる場合があります",
+    "noBodyPhoto": {
+      "description": "服を試着するには、立った状態の全身写真が必要です。",
+      "title": "自分の写真をアップロードしてください",
+      "upload": "写真をアップロード"
+    },
+    "regenerate": "もう一度試す",
+    "removeComment": "コメントを削除",
+    "resultDisclaimer": "この画像は保存されません。保存したい場合はダウンロードしてください。",
+    "selectedItems": "選択したアイテム",
+    "title": "バーチャル試着"
+  },
+  "errors": {
+    "generic": "画像を生成できませんでした。もう一度お試しください。",
+    "noBodyPhoto": "バーチャル試着を使う前に、自分の写真をアップロードしてください。",
+    "quotaExceeded": "Gemini APIのクレジットがなくなりました。ai.studio/projectsでクレジットを追加すると、バーチャル試着を引き続き利用できます。",
+    "sessionExpired": "セッションの有効期限が切れました。もう一度ログインしてお試しください。",
+    "uploadFailed": "写真をアップロードできませんでした。"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "action": "Probador virtual",
+  "bodyPhoto": {
+    "description": "La usa el probador virtual para generar los previews de outfits.",
+    "remove": "Eliminar",
+    "removed": "Foto eliminada",
+    "replace": "Reemplazar",
+    "title": "Foto de cuerpo",
+    "upload": "Subir foto"
+  },
+  "dialog": {
+    "applyComment": "Aplicar comentario",
+    "close": "Cerrar",
+    "description": "Generá un preview de cómo te queda puesto esto, usando tu foto y la IA.",
+    "commentPlaceholder": "Ej: no me pongas la camisa adentro del short",
+    "download": "Descargar imagen",
+    "generate": "Generar",
+    "generating": "Generando... puede tardar unos segundos",
+    "noBodyPhoto": {
+      "description": "Necesitás una foto de cuerpo entero, de pie, para poder probarte prendas.",
+      "title": "Subí una foto tuya",
+      "upload": "Subir foto"
+    },
+    "regenerate": "Volver a intentar",
+    "removeComment": "Quitar comentario",
+    "resultDisclaimer": "Esta imagen no se guarda. Descargala si querés conservarla.",
+    "selectedItems": "Prendas seleccionadas",
+    "title": "Probador virtual"
+  },
+  "errors": {
+    "generic": "No se pudo generar la imagen. Intentá de nuevo.",
+    "noBodyPhoto": "Subí una foto de tu cuerpo antes de usar el probador virtual.",
+    "quotaExceeded": "Se agotó el crédito de la API de Gemini. Cargá saldo en ai.studio/projects para seguir usando el probador virtual.",
+    "sessionExpired": "Tu sesión expiró. Volvé a iniciar sesión e intentá de nuevo.",
+    "uploadFailed": "No se pudo subir la foto."
+  }
+}

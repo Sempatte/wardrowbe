@@ -28,6 +28,7 @@ import {
   Plus,
   Star,
   ImageIcon,
+  PersonStanding,
 } from 'lucide-react';
 import {
   Dialog,
@@ -65,6 +66,7 @@ import { Item } from '@/lib/types';
 import { useClothingTypes, useClothingColors } from '@/lib/hooks/use-translated-constants';
 import { ColorEyedropper } from '@/components/color-eyedropper';
 import { GeneratePairingsDialog } from '@/components/generate-pairings-dialog';
+import { TryOnDialog } from '@/components/try-on-dialog';
 import { useFeatures } from '@/lib/hooks/use-features';
 import { useTranslations } from 'next-intl';
 
@@ -80,12 +82,14 @@ export function ItemDetailDialog({ item, open, onOpenChange }: ItemDetailDialogP
   const t = useTranslations('wardrobe.itemDetail');
   const tc = useTranslations('common');
   const tw = useTranslations('wardrobe');
+  const tt = useTranslations('tryon');
   const router = useRouter();
   const clothingTypes = useClothingTypes();
   const clothingColors = useClothingColors();
   const [isEditing, setIsEditing] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [showPairingsDialog, setShowPairingsDialog] = useState(false);
+  const [showTryOnDialog, setShowTryOnDialog] = useState(false);
   const [imageKey, setImageKey] = useState(0);
   const [editForm, setEditForm] = useState({
     name: '',
@@ -309,6 +313,15 @@ export function ItemDetailDialog({ item, open, onOpenChange }: ItemDetailDialogP
                   title={t('titles.findMatchingOutfits')}
                 >
                   <Layers className="h-5 w-5" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setShowTryOnDialog(true)}
+                  disabled={item.status !== 'ready'}
+                  title={tt('action')}
+                >
+                  <PersonStanding className="h-5 w-5" />
                 </Button>
                 <Button
                   variant="ghost"
@@ -1025,6 +1038,13 @@ export function ItemDetailDialog({ item, open, onOpenChange }: ItemDetailDialogP
         item={item}
         open={showPairingsDialog}
         onOpenChange={setShowPairingsDialog}
+      />
+
+      {/* Virtual Try-On Dialog */}
+      <TryOnDialog
+        items={[item]}
+        open={showTryOnDialog}
+        onOpenChange={setShowTryOnDialog}
       />
     </>
   );

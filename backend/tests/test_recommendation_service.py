@@ -610,3 +610,101 @@ class TestIncludeItems:
             assert isinstance(data, list)
             assert len(data) == 3
             assert mock_generate.call_args.kwargs["count"] == 3
+
+
+class TestEnsureCompleteOutfit:
+    def _service(self) -> RecommendationService:
+        return RecommendationService.__new__(RecommendationService)
+
+    def test_missing_roles_none_when_complete(self):
+        service = self._service()
+        top, bottom, shoes = uuid4(), uuid4(), uuid4()
+        type_map = {top: "shirt", bottom: "pants", shoes: "sneakers"}
+        assert service._missing_required_roles([top, bottom, shoes], type_map) == set()
+
+    def test_missing_roles_dress_only_needs_footwear(self):
+        service = self._service()
+        dress = uuid4()
+        type_map = {dress: "dress"}
+        assert service._missing_required_roles([dress], type_map) == {"footwear"}
+
+    def test_missing_roles_flags_bottom_and_footwear(self):
+        service = self._service()
+        top = uuid4()
+        type_map = {top: "shirt"}
+        assert service._missing_required_roles([top], type_map) == {"bottom", "footwear"}
+
+    def test_backfills_missing_footwear_from_ranked_candidates(self):
+        service = self._service()
+        top, bottom, shoes, bag = uuid4(), uuid4(), uuid4(), uuid4()
+        type_map = {top: "shirt", bottom: "pants", shoes: "sneakers", bag: "bag"}
+        # AI picked only the top and bottom, omitting the shoes it was offered
+        number_map = {1: top, 2: bottom, 3: shoes, 4: bag}
+
+        result = service._ensure_complete_outfit([top, bottom], type_map, number_map)
+
+        assert shoes in result
+        assert bag not in result  # not a required role, must not be pulled in
+
+    def test_leaves_outfit_short_when_no_matching_candidate_exists(self):
+        service = self._service()
+        top, bottom = uuid4(), uuid4()
+        type_map = {top: "shirt", bottom: "pants"}
+        number_map = {1: top, 2: bottom}  # no footwear anywhere in the candidate pool
+
+        result = service._ensure_complete_outfit([top, bottom], type_map, number_map)
+
+        assert set(result) == {top, bottom}
+
+    @pytest.mark.asyncio
+    async def test_materialize_outfit_backfills_footwear_ai_omitted(self, db_session, test_user):
+        shirt = ClothingItem(
+            user_id=test_user.id,
+            type="shirt",
+            image_path=f"test/{uuid4()}.jpg",
+            status=ItemStatus.ready,
+        )
+        pants = ClothingItem(
+            user_id=test_user.id,
+            type="pants",
+            image_path=f"test/{uuid4()}.jpg",
+            status=ItemStatus.ready,
+        )
+        sneakers = ClothingItem(
+            user_id=test_user.id,
+            type="sneakers",
+            image_path=f"test/{uuid4()}.jpg",
+            status=ItemStatus.ready,
+        )
+        db_session.add_all([shirt, pants, sneakers])
+        await db_session.commit()
+
+        service = RecommendationService(db_session)
+        weather = WeatherData(
+            temperature=20,
+            feels_like=20,
+            humidity=50,
+            precipitation_chance=0,
+            precipitation_mm=0,
+            wind_speed=0,
+            condition="clear",
+            condition_code=0,
+            is_day=True,
+            uv_index=0,
+            timestamp=datetime.utcnow(),
+        )
+        # Candidate pool includes sneakers, but the AI response only picked the shirt+pants
+        number_map = {1: shirt.id, 2: pants.id, 3: sneakers.id}
+        outfit_data = {"items": [1, 2], "headline": "Casual day"}
+
+        outfit = await service._materialize_outfit(
+            outfit_data,
+            test_user,
+            weather,
+            occasion="casual",
+            source=OutfitSource.on_demand,
+            number_map=number_map,
+        )
+
+        outfit_item_ids = {oi.item_id for oi in outfit.items}
+        assert sneakers.id in outfit_item_ids

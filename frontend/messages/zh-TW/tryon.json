@@ -1,0 +1,37 @@
+{
+  "action": "虛擬試穿",
+  "bodyPhoto": {
+    "description": "虛擬試穿功能會用它來產生穿搭預覽。",
+    "remove": "刪除",
+    "removed": "照片已刪除",
+    "replace": "更換",
+    "title": "身形照片",
+    "upload": "上傳照片"
+  },
+  "dialog": {
+    "applyComment": "套用留言",
+    "close": "關閉",
+    "commentPlaceholder": "例如：別把襯衫塞進短褲裡",
+    "description": "使用你的照片和 AI，產生穿上這件單品的效果預覽。",
+    "download": "下載圖片",
+    "generate": "產生",
+    "generating": "產生中……可能需要幾秒鐘",
+    "noBodyPhoto": {
+      "description": "需要一張站立的全身照片才能試穿衣物。",
+      "title": "上傳一張你的照片",
+      "upload": "上傳照片"
+    },
+    "regenerate": "重新產生",
+    "removeComment": "移除留言",
+    "resultDisclaimer": "這張圖片不會被儲存，如需保留請下載。",
+    "selectedItems": "已選單品",
+    "title": "虛擬試穿"
+  },
+  "errors": {
+    "generic": "無法產生圖片，請再試一次。",
+    "noBodyPhoto": "請先上傳一張你的照片，再使用虛擬試穿。",
+    "quotaExceeded": "Gemini API 額度已用完。請前往 ai.studio/projects 儲值，以繼續使用虛擬試穿功能。",
+    "sessionExpired": "你的登入已過期，請重新登入後再試一次。",
+    "uploadFailed": "照片上傳失敗。"
+  }
+}
