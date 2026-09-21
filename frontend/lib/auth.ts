@@ -82,20 +82,25 @@ const DevCredentialsProvider = CredentialsProvider({
     };
   },
 });
-// Temporary: dev-credentials login (any email, no password) is only meant to cover the
-// 2026-09-21 to 2026-09-23 trip window. Remove this cutoff (and the matching one in
-// backend/app/api/auth.py) once real auth (OIDC) is set up, rather than extending it.
+// Temporary safety net, kept even though OIDC is now configured: caps how long dev-credentials
+// login (any email, no password) could work if OIDC_ISSUER_URL were ever unset by mistake.
+// Remove this cutoff (and the matching one in backend/app/api/auth.py) once OIDC has been
+// running reliably for a while, rather than extending it.
 const DEV_MODE_CUTOFF = new Date('2026-09-23T23:59:59Z');
 
 // Determine which provider to use
 function getProviders() {
   const providers = [];
 
-  if (process.env.OIDC_ISSUER_URL) {
+  const oidcConfigured = Boolean(process.env.OIDC_ISSUER_URL);
+  if (oidcConfigured) {
     providers.push(OIDCProvider);
   }
 
+  // Mirrors the backend's own rule (app/api/auth.py: _is_dev_mode): dev-credentials login only
+  // exists when OIDC isn't configured at all, so the two never both show as live options.
   const devModeActive =
+    !oidcConfigured &&
     (process.env.DEV_MODE === 'true' || process.env.NODE_ENV === 'development') &&
     new Date() <= DEV_MODE_CUTOFF;
   if (devModeActive) {
