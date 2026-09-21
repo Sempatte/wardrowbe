@@ -14,8 +14,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY requirements.txt requirements-extras.txt ./
 RUN pip install --no-cache-dir -r requirements.txt -r requirements-extras.txt
 
-# Pre-download rembg model so first request is instant
-RUN python -c "from rembg import new_session; new_session()"
+# rembg model is no longer pre-downloaded at build time: fetching it here needs a big,
+# reliable download mid-build, which timed out repeatedly under QEMU emulation (cross-building
+# linux/amd64 on Apple Silicon). It now downloads lazily on the first background-removal
+# request instead — slower that one time, but a much faster and more reliable build.
 
 # Copy application code
 COPY . .

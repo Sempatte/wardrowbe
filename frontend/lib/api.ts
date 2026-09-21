@@ -1,5 +1,13 @@
 const API_BASE_PATH = '/api/v1';
 
+// Large file uploads (create item, replace/add images, bulk upload) go straight to the backend
+// when NEXT_PUBLIC_API_URL is set, bypassing the Next.js server-side proxy route — that proxy
+// runs on Amplify's Lambda compute, which has a hard ~6MB request-body ceiling that ordinary
+// phone photos exceed. Every other request stays on the relative proxy path; this is upload-only.
+export const UPLOAD_BASE_PATH = process.env.NEXT_PUBLIC_API_URL
+  ? `${process.env.NEXT_PUBLIC_API_URL.replace(/\/+$/, '')}${API_BASE_PATH}`
+  : API_BASE_PATH;
+
 interface FetchOptions extends RequestInit {
   params?: Record<string, string>;
 }

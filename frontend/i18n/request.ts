@@ -2,6 +2,7 @@ import { cookies, headers } from 'next/headers';
 import { getRequestConfig } from 'next-intl/server';
 import {
   DEFAULT_LOCALE,
+  INITIAL_LOCALE,
   LOCALE_COOKIE,
   NAMESPACES,
   isValidLocale,
@@ -51,14 +52,16 @@ async function detectLocale(): Promise<SupportedLocale> {
   }
   if (isValidLocale(cookieLocale)) return cookieLocale;
 
-  // No explicit choice stored yet, so honour the browser's preference on first visit.
+  // No explicit choice stored yet. This app only has Spanish-speaking users, so new visitors
+  // start on Spanish (INITIAL_LOCALE) regardless of browser language — except when the browser
+  // explicitly asks for one of the other supported (non-English) locales, which we still honor.
   let acceptLanguage: string | null = null;
   try {
     acceptLanguage = (await headers()).get('accept-language');
   } catch {
     acceptLanguage = null;
   }
-  if (!acceptLanguage) return DEFAULT_LOCALE;
+  if (!acceptLanguage) return INITIAL_LOCALE;
 
   const preferences = acceptLanguage
     .split(',')
@@ -71,12 +74,13 @@ async function detectLocale(): Promise<SupportedLocale> {
     .sort((a, b) => b.quality - a.quality);
 
   for (const { tag } of preferences) {
-    if (tag.toLowerCase().split('-')[0] === 'en') return DEFAULT_LOCALE;
+    const base = tag.toLowerCase().split('-')[0];
+    if (base === 'en' || base === 'es') return INITIAL_LOCALE;
     const resolved = resolveLocale(tag);
     if (resolved !== DEFAULT_LOCALE) return resolved;
   }
 
-  return DEFAULT_LOCALE;
+  return INITIAL_LOCALE;
 }
 
 export default getRequestConfig(async () => {

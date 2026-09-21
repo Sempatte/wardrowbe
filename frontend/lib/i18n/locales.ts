@@ -2,7 +2,15 @@ export const SUPPORTED_LOCALES = ['en', 'es', 'zh-CN', 'zh-TW', 'ko', 'ja', 'fr'
 
 export type SupportedLocale = (typeof SUPPORTED_LOCALES)[number];
 
+// The base language every other locale's messages fall back to for a key still awaiting
+// translation (see i18n/request.ts loadMessages) — keep this 'en' regardless of which locale
+// new visitors land on, so an untranslated fr/de/ja/etc key doesn't render in Spanish instead.
 export const DEFAULT_LOCALE: SupportedLocale = 'en';
+
+// What a brand-new visitor (no NEXT_LOCALE cookie yet) sees, regardless of browser language —
+// this app only has Spanish-speaking users. Explicit choices (the language switcher, which sets
+// the cookie) always override this.
+export const INITIAL_LOCALE: SupportedLocale = 'es';
 
 export const LOCALE_COOKIE = 'NEXT_LOCALE';
 
@@ -38,6 +46,7 @@ export const NAMESPACES = [
   'outfits',
   'constants',
   'errors',
+  'tryon',
 ] as const;
 
 export type Namespace = (typeof NAMESPACES)[number];
