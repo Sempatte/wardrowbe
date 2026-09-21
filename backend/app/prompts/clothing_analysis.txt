@@ -5,19 +5,21 @@ Analyze the MAIN clothing item in this image. Use ONLY these values:
 TYPE (required, pick one):
 shirt, t-shirt, top, pants, jeans, shorts, dress, jumpsuit, skirt, jacket, coat, sweater, hoodie, blazer, vest, cardigan, polo, blouse, tank-top, shoes, sneakers, boots, sandals, socks, tie, hat, scarf, belt, bag, accessories
 
-SUBTYPE (optional): A more specific name within the type. Examples:
-- shirt → henley, button-down, oxford, flannel, hawaiian, camp-collar
-- pants → chinos, joggers, cargo, trousers, leggings, sweatpants
-- dress → sundress, slip-dress, maxi, midi, wrap, shirt-dress, a-line
-- jacket → denim-jacket, bomber, parka, windbreaker, trucker, anorak
-- shoes → loafers, oxfords, mules, flats, heels, platforms
-- sneakers → low-top, high-top, chunky, slip-on
-- boots → ankle, chelsea, combat, knee-high, rain
-- skirt → mini, midi, maxi, pleated, wrap, pencil
-- sweater → pullover, crewneck, turtleneck, v-neck
-- socks → ankle, crew, knee-high, no-show, dress, athletic
-- tie → necktie, bow-tie, bolo
-Use null if the type is specific enough (e.g. jeans, hoodie, blazer).
+SUBTYPE (optional): A more specific name within the type, written in Spanish
+using everyday Peruvian clothing terms (not English, not Rioplatense Spanish).
+Examples:
+- shirt (camisa) → camisa hawaiana, cuello mao, a cuadros, de franela, manga larga
+- pants (pantalón) → chino, jogger, cargo, de vestir, leggings, buzo
+- dress (vestido) → vestido de tiras, entallado, midi, largo, cruzado, camisero
+- jacket (casaca) → casaca de jean, bomber, parka, rompevientos, trucker
+- shoes (zapatos) → mocasines, oxford, mules, bajos, taco, plataforma
+- sneakers (zapatillas) → urbanas, botín, chunky, slip-on
+- boots (botas) → tobilleras, chelsea, de combate, altas, de lluvia
+- skirt (falda) → mini, midi, larga, plisada, cruzada, tubo
+- sweater (chompa) → cuello redondo, cuello alto, cuello en V
+- socks (medias) → tobilleras, largas, invisibles, de vestir, deportivas
+- tie (corbata) → corbata clásica, moño, bolo
+Use null if the type is specific enough on its own (e.g. jean, polerón, saco).
 
 PRIMARY_COLOR (required, pick one):
 black, white, gray, navy, blue, light-blue, red, burgundy, pink, green, olive, yellow, orange, purple, brown, tan, beige, cream, gold, silver

@@ -80,6 +80,8 @@ function ItemCard({
   const tc = useTranslations('common');
   const clothingColors = useClothingColors();
   const colorInfo = clothingColors.find((c) => c.value === item.primary_color);
+  const clothingTypes = useClothingTypes();
+  const typeInfo = clothingTypes.find((ct) => ct.value === item.type);
   const isProcessing = item.status === 'processing';
   const isError = item.status === 'error' && !errorDismissed;
   const isBackgroundRemovalKind = item.processing_kind === 'background_removal';
@@ -110,7 +112,7 @@ function ItemCard({
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-muted-foreground text-sm">
-            {item.type}
+            {typeInfo ? typeInfo.label : item.type}
           </div>
         )}
         {/* Checkbox in top-left */}
@@ -242,10 +244,10 @@ function ItemCard({
         <div className="flex items-start justify-between gap-2">
           <div className="min-w-0 flex-1">
             <p className="font-medium text-sm truncate">
-              {item.name || item.type}
+              {item.name || (typeInfo ? typeInfo.label : item.type)}
             </p>
             <p className="text-xs text-muted-foreground capitalize">
-              {item.type}
+              {typeInfo ? typeInfo.label : item.type}
               {item.subtype && ` • ${item.subtype}`}
               {item.tags?.logprobs_confidence != null && ` · ${t('ai.confident', { percent: Math.round(item.tags.logprobs_confidence * 100) })}`}
             </p>
