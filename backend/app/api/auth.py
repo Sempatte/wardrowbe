@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 from typing import Annotated
 from urllib.parse import urlencode
 
@@ -41,7 +41,15 @@ def create_access_token(external_id: str, expires_delta: timedelta | None = None
     return jwt.encode(to_encode, settings.secret_key, algorithm="HS256")
 
 
+# Temporary: dev-credentials login (any email, no password) is only meant to cover the
+# 2026-09-21 to 2026-09-23 trip window. Remove this cutoff (and the matching one in
+# frontend/lib/auth.ts) once real auth (OIDC) is set up, rather than extending it.
+DEV_MODE_CUTOFF = date(2026, 9, 23)
+
+
 def _is_dev_mode() -> bool:
+    if date.today() > DEV_MODE_CUTOFF:
+        return False
     return settings.debug and not _oidc_configured()
 
 
